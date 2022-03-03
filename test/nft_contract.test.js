@@ -5,7 +5,9 @@ let truffleAssert = require("truffle-assertions");
 
 contract("NFT", (accounts)=> {
   let seller = accounts[0];
-  console.log(seller);
+  let buyer = accounts[1];
+  // console.log(seller);
+
   let nft;
   
   beforeEach(async()=>{
@@ -14,12 +16,22 @@ contract("NFT", (accounts)=> {
 
   it("should create an NFT", async ()=> {
 
-    let transactionResult = await nft.createNFT("NFT #1", 1000000000000000);
+    let transactionResult = await nft.createNFT("NFT #1", 1000000000000000000);
     console.log(transactionResult);
     truffleAssert.eventEmitted(transactionResult, "NFTCreated", (event)=>{
       return event.name=="NFT #1" && event.id==1;
     });
     // return assert.isTrue(true);
+  });
+
+  it("sells nft", async()=>{
+    let oldSellerBalance;
+    oldSellerBalance = await web3.eth.getBalance(seller);
+    oldSellerBalance = new web3.utils.BN(oldSellerBalance);
+
+    result = await nft.purchaseNFT(nftCount, {from: buyer, value: web3.utils.toWei('1','Ether')});
+
+    
   });
 
   // before(async()=>{
