@@ -1,0 +1,9 @@
+.logoimage{
+    width: 20%;
+    height: 60%;
+}
+
+.backg{
+    /* background-color: rgb(168, 168, 168); */
+    background: linear-gradient(45deg, #f9a5c1 0%, #66c1ff 100%);
+}
