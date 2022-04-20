@@ -31,18 +31,15 @@ const CreateNFT = () => {
 
   function handleInputChange(event) {
     let { name, value } = event.target;
-    // if(name === 'image'){
-    //   value = event.target.files[0];
-    // }
     setFormData({ ...formData, [name]: value });
   }
 
   async function createNFT(event) {
     event.preventDefault();
-    const { title, description } = formData;
+    const { title, description, price } = formData;
 
     console.log("title: " + title);
-
+    
     const data = new FormData();
     data.append("name", title);
     data.append("description", description);
@@ -51,6 +48,13 @@ const CreateNFT = () => {
       data.append('img', selectedFile);
       console.log("slectedFile: ", selectedFile);
     }
+
+    data.append("price", price);
+    async function getPrice(){
+      return this.price;
+    }    
+
+    console.log("Price:"+price);
 
     try {
       const totalSupply = await artTokenContract.methods.totalSupply().call();
@@ -66,7 +70,6 @@ const CreateNFT = () => {
       mint(response.data.message);
     } catch (error) {
       console.log(error);
-      // error.response.data
     }
   }
 
@@ -77,16 +80,7 @@ const CreateNFT = () => {
         .send({ from: account });
       console.log(receipt);
       console.log(receipt.events.Transfer.returnValues.tokenId);
-      // setItems(items => [...items, {
-      //   tokenId: receipt.events.Transfer.returnValues.tokenId,
-      //   creator: accounts[0],
-      //   owner: accounts[0],
-      //   uri: tokenMetadataURL,
-      //   isForSale: false,
-      //   saleId: null,
-      //   price: 0,
-      //   isSold: null
-      // }]);
+
       history.push('/');
     } catch (error) {
       console.error("Error, minting: ", error);
@@ -99,7 +93,7 @@ const CreateNFT = () => {
     <div className={classes.pageCreateNft}>
       <form onSubmit={createNFT} >
         <div className={classes.formHeader}>
-          <h1>Create collectible</h1>
+          <h1>Upload your artwork</h1>
           <Link to="/">
             <CancelOutlinedIcon fontSize="large" />
           </Link>

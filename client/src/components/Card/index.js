@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import Web3 from "web3";
 
 import { Card as MuiCard } from "@material-ui/core";
@@ -11,11 +13,24 @@ import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
+import CreateNFT from "../../pages/CreateNFT/index.js";
+
 import { useStyles } from "./styles.js";
 import { ReactComponent as EthereumLogo } from "../../assets/ethereum_logo.svg";
 
 const Card = ({ tokenId, name, image, price, owner, isForSale }) => {
   const classes = useStyles();
+  const price_one = price;
+  const account = useSelector((state) => state.allNft.account);
+  let show = false;
+  let show2 = false;
+  if(isForSale)
+    show2 = true;
+  if(account!=owner && isForSale)
+    show = true;
+  console.log(show,account,owner);
+
+  console.log("Price of NFT:"+price);
   console.log("image: ", image);
   return (
     <Link to={`/nft/${tokenId}`}>
@@ -39,9 +54,17 @@ const Card = ({ tokenId, name, image, price, owner, isForSale }) => {
               </Typography>
               <Chip
                 size="small"
-                disabled={true}
+                disabled={!show2}
                 label="Selling"
                 className={classes.badge}
+              />
+              
+              <Chip
+                size="small"
+                disabled={!show}
+                label="Buyable"
+                id="buyable"
+                className={classes.badge2}
               />
             </div>
             <Typography variant="h6" className={classes.price}>
@@ -50,7 +73,9 @@ const Card = ({ tokenId, name, image, price, owner, isForSale }) => {
                 viewBox="0 0 400 426.6"
                 titleAccess="ETH"
               />
-              <span>{Web3.utils.fromWei(String(price), "ether")}.120000</span>
+              <span>{Web3.utils.fromWei(String(price_one), "ether")}</span>
+              {/* <span>{CreateNFT.createNFT.getPrice()}</span> */}
+             
             </Typography>
             <Divider className={classes.divider} light />
             <Typography

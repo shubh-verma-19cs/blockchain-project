@@ -170,7 +170,7 @@ const Home = () => {
             <Typography>A decentralized NFT marketplace where you can expose your art.</Typography>
             <Link to="/create-nft">
               <Button variant="contained" color="primary" disableElevation>
-                Mint your own uniqueness
+                Mint your artwork
               </Button>
             </Link>
           </Grid>

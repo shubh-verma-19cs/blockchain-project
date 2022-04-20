@@ -15,10 +15,10 @@ contract ArtToken is ERC721Enumerable{
   struct Item {
     uint256 id;
     address creator;
-    string uri;//metadata url
+    string uri;
   }
 
-  mapping(uint256 => Item) public Items; //id => Item
+  mapping(uint256 => Item) public Items; 
 
   constructor () ERC721("ArtToken", "ARTK") {}
 
@@ -43,7 +43,6 @@ contract ArtToken is ERC721Enumerable{
   }
 
   function setMarketplace(address market) public {
-    //require(msg.sender ==);
     marketplace = market;
   }
 

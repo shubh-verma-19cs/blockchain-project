@@ -15,7 +15,7 @@ contract ArtMarketplace {
   }
 
   ItemForSale[] public itemsForSale;
-  mapping(uint256 => bool) public activeItems; // tokenId => ativo?
+  mapping(uint256 => bool) public activeItems;
 
   event itemAddedForSale(uint256 id, uint256 tokenId, uint256 price);
   event itemSold(uint256 id, address buyer, uint256 price);
@@ -87,7 +87,3 @@ contract ArtMarketplace {
     return itemsForSale.length;
   }
 }
-
-//TODO:
-// - don't support bidding
-// - the user can't withdraw the item

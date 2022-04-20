@@ -34,11 +34,24 @@ const useStyles = makeStyles({
     fontSize: "0.9rem",
     height: "1.4rem",
     marginLeft: "auto",
+    color: "black",
+    backgroundColor: "#86f9d1",
+    '&:active': {
+      boxShadow: '5px',
+      textDecoration: "underline",
+      color: "black",
+      backgroundColor: "#1c75c9"
+    },
+  },
+  badge2: {
+    fontSize: "0.9rem",
+    height: "1.4rem",
+    marginLeft: "auto",
     color: "white",
-    backgroundColor: "#00BE7A",
+    backgroundColor: "#f9492f",
     '&:active': {
       boxShadow: 'none',
-      backgroundColor: "#DDE1E3"
+      backgroundColor: "#c72f18"
     },
   },
   price: {
